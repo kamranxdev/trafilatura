@@ -18,11 +18,6 @@ import 'utils.dart';
 /// Dot space pattern
 final _dotSpace = RegExp(r'\.( |$)');
 
-/// Elements that should convert div to p
-const Set<String> _divToPElems = {
-  'a', 'blockquote', 'dl', 'div', 'img', 'ol', 'p', 'pre', 'table', 'ul',
-};
-
 /// Div score elements
 const Set<String> _divScores = {'div', 'article'};
 
@@ -367,26 +362,24 @@ class ReadabilityDocument {
         final contentLength = textLength(elem);
         final linkDensity = _getLinkDensity(elem);
         
-        String? reason;
-        
         if ((counts['p'] ?? 0) > 0 && (counts['img'] ?? 0) > 1 + (counts['p']! * 1.3)) {
-          reason = 'too many images';
+          // too many images
         } else if ((counts['li'] ?? 0) > (counts['p'] ?? 0) && !_listTags.contains(elem.localName)) {
-          reason = 'more <li>s than <p>s';
+          // more <li>s than <p>s
         } else if ((counts['input'] ?? 0) > ((counts['p'] ?? 0) / 3)) {
-          reason = 'less than 3x <p>s than <input>s';
+          // less than 3x <p>s than <input>s
         } else if (contentLength < minTextLength && (counts['img'] ?? 0) == 0) {
-          reason = 'too short without images';
+          // too short without images
         } else if (contentLength < minTextLength && (counts['img'] ?? 0) > 2) {
-          reason = 'too short and too many images';
+          // too short and too many images
         } else if (weight < 25 && linkDensity > 0.2) {
-          reason = 'too many links for weight';
+          // too many links for weight
         } else if (weight >= 25 && linkDensity > 0.5) {
-          reason = 'too many links for weight';
+          // too many links for weight
         } else if (((counts['embed'] ?? 0) == 1 && contentLength < 75) || (counts['embed'] ?? 0) > 1) {
-          reason = 'embed issues';
+          // embed issues
         } else if (contentLength == 0) {
-          reason = 'no content';
+          // no content
           
           // Check siblings
           final siblings = <int>[];

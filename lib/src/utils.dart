@@ -227,7 +227,7 @@ dom.Document? loadHtml(dynamic htmlobject) {
   }
   
   // Rejection test
-  if (tree != null && checkFlag && (tree.body?.children.length ?? 0) < 2) {
+  if (checkFlag && (tree.body?.children.length ?? 0) < 2) {
     return null;
   }
   

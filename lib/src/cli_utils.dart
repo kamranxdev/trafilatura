@@ -280,10 +280,6 @@ Iterable<String> generateFilelist(String inputDir) sync* {
 
 /// Convert CLI args to Extractor.
 Extractor argsToExtractor(dynamic args, {String? url}) {
-  String focus = 'balanced';
-  if (args.precision) focus = 'precision';
-  if (args.recall) focus = 'recall';
-  
   return Extractor(
     url: url ?? args.url,
     outputFormat: args.outputFormat,
@@ -418,8 +414,6 @@ Future<int> cliDiscovery(dynamic args) async {
     urlStore.reset();
   }
   
-  final options = argsToExtractor(args);
-  
   // Discover URLs
   for (var url in inputUrls) {
     List<String> discovered;
@@ -442,7 +436,6 @@ Future<int> cliDiscovery(dynamic args) async {
 
 /// CLI crawler function.
 Future<void> cliCrawler(dynamic args, {int n = 30, UrlStore? urlStore}) async {
-  final options = argsToExtractor(args);
   final inputUrls = await loadInputUrls(args);
   
   for (var url in inputUrls) {

@@ -9,8 +9,6 @@ import 'package:xml/xml.dart';
 
 import 'settings.dart';
 import 'utils.dart' hide textfilter, isImageElement;
-import 'xml_utils.dart';
-import 'xpaths.dart';
 import 'deduplication.dart';
 
 /// Rend tag mapping for formatting

@@ -87,7 +87,6 @@ final _jsonPublisher = RegExp(
 );
 final _jsonType = RegExp(r'"@type"\s*:\s*"([^"]*)"', dotAll: true);
 final _jsonCategory = RegExp(r'"articleSection": ?"([^"\\]+)', dotAll: true);
-final _jsonMatch = RegExp(r'"author":|"person":', caseSensitive: false);
 final _jsonRemoveHtml = RegExp(r'<[^>]+>');
 final _jsonSchemaOrg = RegExp(r'^https?://schema\.org', caseSensitive: false);
 final _jsonUnicodeReplace = RegExp(r'\\u([0-9a-fA-F]{4})');
@@ -217,7 +216,7 @@ Document processParent(List<dynamic> parent, Document metadata) {
                     .join(' ');
               }
               
-              if (authorName != null && authorName is String) {
+              if (authorName != null) {
                 metadata.author = normalizeAuthors(metadata.author, authorName);
               }
             }

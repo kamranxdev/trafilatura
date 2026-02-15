@@ -7,12 +7,8 @@ library;
 import 'dart:async';
 import 'dart:collection';
 
-import 'package:html/dom.dart';
-
-import 'baseline.dart';
 import 'downloads.dart';
 import 'feeds.dart';
-import 'settings.dart';
 import 'utils.dart';
 
 /// Robots.txt URL suffix.
@@ -120,7 +116,6 @@ class RobotRules {
   /// Parse robots.txt content.
   static RobotRules? parse(String content) {
     final rules = RobotRules();
-    var inUserAgentBlock = false;
     var isRelevantBlock = false;
     
     for (var line in content.split('\n')) {
@@ -140,7 +135,6 @@ class RobotRules {
       final value = parts.sublist(1).join(':').trim();
       
       if (key == 'user-agent') {
-        inUserAgentBlock = true;
         isRelevantBlock = value == '*' || value.contains('bot');
       } else if (isRelevantBlock) {
         if (key == 'disallow' && value.isNotEmpty) {

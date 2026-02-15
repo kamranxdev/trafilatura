@@ -105,9 +105,6 @@ const Set<String> _metanameTitle = {
   'twitter:title',
 };
 
-/// Meta name URL attributes
-const Set<String> _metanameUrl = {'rbmainurl', 'twitter:url'};
-
 /// Meta name image attributes
 const Set<String> _metanameImage = {
   'image',
@@ -123,9 +120,6 @@ const Set<String> _propertyAuthor = {'author', 'article:author'};
 
 /// Twitter attributes
 const Set<String> _twitterAttrs = {'twitter:site', 'application-name'};
-
-/// Extra meta attributes
-const Set<String> _extraMeta = {'charset', 'http-equiv', 'property'};
 
 /// OpenGraph properties mapping
 const Map<String, String> _ogProperties = {
@@ -197,7 +191,7 @@ Document extractMetaJson(dom.Element tree, Document metadata) {
   
   for (final elem in scripts) {
     final text = elem.text;
-    if (text == null || text.isEmpty) continue;
+    if (text.isEmpty) continue;
     
     final elementText = normalizeJson(
       _jsonMinifyRegex.hasMatch(text)
@@ -542,7 +536,7 @@ String? parseLicenseElement(dom.Element element, {bool strict = false}) {
   }
   
   final text = element.text;
-  if (text != null && text.isNotEmpty) {
+  if (text.isNotEmpty) {
     if (strict) {
       final textMatch = _textLicenseRegex.firstMatch(text);
       return textMatch?.group(0);
@@ -786,7 +780,7 @@ String? findDate(dom.Element tree, Map<String, dynamic> config) {
       final dateStr = element.attributes['content'] ??
           element.attributes['datetime'] ??
           element.text;
-      if (dateStr != null && dateStr.isNotEmpty) {
+      if (dateStr.isNotEmpty) {
         final parsed = _parseDate(dateStr);
         if (parsed != null) {
           return parsed;

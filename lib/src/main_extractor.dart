@@ -5,11 +5,8 @@
 library;
 
 import 'package:html/dom.dart';
-import 'dart:math';
 
 import 'settings.dart';
-import 'utils.dart';
-import 'htmlprocessing.dart';
 import 'xpaths.dart';
 
 /// Tags that should not appear at the end of extracted content.
@@ -24,22 +21,9 @@ const Set<String> _formatting = {'em', 'i', 'b', 'strong', 'u', 'sub', 'sup', 'd
 /// List tags.
 const Set<String> _listTags = {'ul', 'ol', 'dl'};
 
-/// Processed marker attribute.
-const String _processedAttr = 'data-trafilatura-processed';
-
 /// Ensure elem.text is not null, empty, or just whitespace.
 bool _textCharsTest(String? text) {
   return text != null && text.trim().isNotEmpty;
-}
-
-/// Check if element has already been processed.
-bool _isProcessed(Element elem) {
-  return elem.attributes.containsKey(_processedAttr);
-}
-
-/// Mark element as processed.
-void _markProcessed(Element elem) {
-  elem.attributes[_processedAttr] = 'true';
 }
 
 /// Safely get element text.
@@ -50,22 +34,6 @@ String _getText(Element elem) {
 /// Get all text content including nested elements.
 String _getAllText(Element elem) {
   return elem.text;
-}
-
-/// Delete element from parent, optionally keeping tail text.
-void _deleteElement(Element elem, {bool keepTail = false}) {
-  final parent = elem.parent;
-  if (parent == null) return;
-  
-  if (keepTail) {
-    // Get following text if any (approximation since Dart DOM doesn't have .tail)
-    final siblings = parent.children.toList();
-    final index = siblings.indexOf(elem);
-    if (index >= 0 && index < siblings.length - 1) {
-      // Nothing special needed; Dart DOM handles this differently
-    }
-  }
-  elem.remove();
 }
 
 /// Strip specific tags from tree while keeping their content.
@@ -102,28 +70,6 @@ Element _createElement(String tag, {String? text, Map<String, String>? attribute
     elem.attributes.addAll(attributes);
   }
   return elem;
-}
-
-/// Process a single node for text content.
-Element? _processNode(Element element, Extractor options) {
-  // Skip if already processed
-  if (_isProcessed(element)) return null;
-  
-  final text = _getText(element);
-  if (!_textCharsTest(text)) return null;
-  
-  _markProcessed(element);
-  
-  // Create processed element
-  final processed = Element.tag(element.localName ?? 'p');
-  processed.text = text;
-  
-  // Filter based on options
-  if (!options.dedup) {
-    return processed;
-  }
-  
-  return processed;
 }
 
 /// Handle title/heading elements.
@@ -286,7 +232,6 @@ Element? handleParagraphs(Element element, Set<String> potentialTags, Extractor 
     final links = element.querySelectorAll('a[href]');
     if (links.isNotEmpty) {
       // Complex case: preserve link structure
-      var currentText = text;
       for (var link in links) {
         final linkText = _getText(link);
         final href = link.attributes['href'];
@@ -666,14 +611,14 @@ void _deleteByLinkDensity(Element tree, String tag, {bool favorPrecision = false
 /// Returns a tuple of (body element, text content, text length).
 (Element, String, int) extractContent(Element cleanedTree, Extractor options) {
   // Make a backup for recovery
-  final backupTree = cleanedTree.clone(true) as Element;
+  final backupTree = cleanedTree.clone(true);
   
   var (resultBody, tempText, potentialTags) = _extract(cleanedTree, options);
   
   // Try parsing wild elements if nothing found or text too short
   if (resultBody.children.isEmpty || tempText.length < options.minExtractedSize) {
     resultBody = recoverWildText(backupTree, resultBody, options, potentialTags);
-    tempText = _getAllText(resultBody).trim();
+    tempText = resultBody.text.trim();
   }
   
   // Filter output

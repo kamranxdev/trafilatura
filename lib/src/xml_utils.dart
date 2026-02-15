@@ -74,7 +74,7 @@ void deleteElement(XmlElement element, {bool keepTail = true}) {
     
     // Check for text node after this element
     if (index + 1 < siblings.length && siblings[index + 1] is XmlText) {
-      final tailText = (siblings[index + 1] as XmlText).text;
+      final tailText = (siblings[index + 1] as XmlText).value;
       
       // Find previous sibling element or prepend to parent
       XmlElement? previousElement;
@@ -89,7 +89,7 @@ void deleteElement(XmlElement element, {bool keepTail = true}) {
         // Append to previous element's trailing text
         final prevIndex = parent.children.indexOf(previousElement);
         if (prevIndex + 1 < parent.children.length && parent.children[prevIndex + 1] is XmlText) {
-          final existingText = (parent.children[prevIndex + 1] as XmlText).text;
+          final existingText = (parent.children[prevIndex + 1] as XmlText).value;
           parent.children[prevIndex + 1] = XmlText('$existingText$tailText');
         } else {
           parent.children.insert(prevIndex + 1, XmlText(tailText));
@@ -132,7 +132,7 @@ void mergeWithParent(XmlElement element, {bool includeFormatting = false}) {
     // Append to previous element's tail
     final prevIndex = parent.children.indexOf(previous);
     if (prevIndex + 1 < parent.children.length && parent.children[prevIndex + 1] is XmlText) {
-      final existingText = (parent.children[prevIndex + 1] as XmlText).text;
+      final existingText = (parent.children[prevIndex + 1] as XmlText).value;
       parent.children[prevIndex + 1] = XmlText('$existingText $fullText');
     } else {
       parent.children.insert(prevIndex + 1, XmlText(' $fullText'));
@@ -140,7 +140,7 @@ void mergeWithParent(XmlElement element, {bool includeFormatting = false}) {
   } else {
     // Prepend to parent text
     if (parent.children.isNotEmpty && parent.children.first is XmlText) {
-      final existingText = (parent.children.first as XmlText).text;
+      final existingText = (parent.children.first as XmlText).value;
       parent.children.first = XmlText('$existingText $fullText');
     } else {
       parent.children.insert(0, XmlText(fullText));
@@ -531,7 +531,7 @@ String _getDirectText(XmlElement element) {
   final buffer = StringBuffer();
   for (final child in element.children) {
     if (child is XmlText) {
-      buffer.write(child.text);
+      buffer.write(child.value);
     }
   }
   return buffer.toString().trim();

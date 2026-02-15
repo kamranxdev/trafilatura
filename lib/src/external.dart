@@ -6,7 +6,6 @@ library;
 import 'package:html/dom.dart' as dom;
 import 'package:xml/xml.dart';
 
-import 'baseline.dart';
 import 'htmlprocessing.dart';
 import 'readability_lxml.dart';
 import 'settings.dart';
@@ -249,7 +248,7 @@ XmlElement tryJustext(dom.Element tree, String? url, String? targetLanguage) {
   
   // Proceed
   final temppostAlgo = tryJustext(cleanTree, options.url, options.lang);
-  final tempText = trim(xmltotxt(temppostAlgo, includeFormatting: options.formatting) ?? '');
+  final tempText = trim(xmltotxt(temppostAlgo, includeFormatting: options.formatting));
   
   return (temppostAlgo, tempText, tempText.length);
 }
@@ -310,7 +309,7 @@ XmlElement tryJustext(dom.Element tree, String? url, String? targetLanguage) {
   }
   
   // 4. Return
-  final text = trim(xmltotxt(xml, includeFormatting: options.formatting) ?? '');
+  final text = trim(xmltotxt(xml, includeFormatting: options.formatting));
   return (xml, text, text.length);
 }
 

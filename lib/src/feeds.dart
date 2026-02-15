@@ -236,7 +236,7 @@ List<String> findLinks(String feedString, FeedParameters params) {
           if (items != null) {
             return items
                 .map((item) => (item as Map<String, dynamic>?)?['url'] ?? 
-                               (item as Map<String, dynamic>?)?['id'])
+                               item?['id'])
                 .where((url) => url != null)
                 .cast<String>()
                 .take(DefaultConfig.maxLinks)

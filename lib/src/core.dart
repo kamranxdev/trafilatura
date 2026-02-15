@@ -117,8 +117,8 @@ String determineReturnString(Document document, Extractor options) {
   // Comparison with external extractors
   if (!options.fast) {
     final compared = compareExtraction(
-      cleanedTreeBackup.clone(true) as Element,
-      treeBackup.clone(true) as Element,
+      cleanedTreeBackup.clone(true),
+      treeBackup.clone(true),
       domToXml(postbody),
       tempText,
       lenText,
@@ -131,7 +131,7 @@ String determineReturnString(Document document, Extractor options) {
   
   // Rescue: baseline extraction on original/dirty tree
   if (lenText < options.minExtractedSize && options.focus != 'precision') {
-    final baselineResult = baseline(treeBackup.clone(true) as Element);
+    final baselineResult = baseline(treeBackup.clone(true));
     final xmlRes = baselineResult.$1;
     postbody = xmlToDom(xmlRes);
     tempText = baselineResult.$2;
@@ -213,9 +213,9 @@ Document? bareExtraction({
       );
       
       // Check URL blacklist
-      if (options.urlBlacklist != null && 
+      if (options.urlBlacklist.isNotEmpty && 
           document.url != null &&
-          options.urlBlacklist!.contains(document.url)) {
+          options.urlBlacklist.contains(document.url)) {
         return null;
       }
       
@@ -244,8 +244,8 @@ Document? bareExtraction({
     }
     
     // Clean and backup for further processing
-    final cleanedTree = treeCleaning(workingTree.clone(true) as Element, options);
-    final cleanedTreeBackup = cleanedTree.clone(true) as Element;
+    final cleanedTree = treeCleaning(workingTree.clone(true), options);
+    final cleanedTreeBackup = cleanedTree.clone(true);
     
     // Convert tags
     final convertedTree = convertTags(cleanedTree, options, url: options.url ?? document.url);
