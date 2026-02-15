@@ -1,0 +1,35 @@
+# Dart/Flutter
+.dart_tool/
+.packages
+build/
+pubspec.lock
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Coverage
+coverage/
+
+# Generated files
+*.g.dart
+*.freezed.dart
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Test cache
+.test_cache/
+
+# Documentation build
+docs/_build/
+
+# Temporary files
+*.tmp
+
+test/eval/mitvergnuegen.de.herbst.html
+test/eval/edition.cnn.com-royal.html
