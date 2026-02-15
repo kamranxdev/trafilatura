@@ -18,8 +18,8 @@ preferred-citation:
   title: "Trafilatura: A Web Scraping Library and Command-Line Tool for Text Discovery and Extraction"
   type: article
   year: 2021
-repository: https://github.com/kamranxdev/trafilatura-dart
-repository-code: https://github.com/kamranxdev/trafilatura-dart
+repository: https://github.com/kamranxdev/trafilatura
+repository-code: https://github.com/kamranxdev/trafilatura
 title: Trafilatura Dart
 type: software
 url: https://pub.dev/packages/trafilatura

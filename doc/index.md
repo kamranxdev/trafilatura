@@ -93,7 +93,7 @@ trafilatura --input-dir ./html --output-dir ./text
 
 ## Resources
 
-- [GitHub Repository](https://github.com/kamranxdev/trafilatura-dart)
+- [GitHub Repository](https://github.com/kamranxdev/trafilatura)
 - [pub.dev Package](https://pub.dev/packages/trafilatura)
 - [Original Python Library](https://github.com/adbar/trafilatura) by Adrien Barbaresi
 - [Original Documentation](https://trafilatura.readthedocs.io/)

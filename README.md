@@ -373,7 +373,7 @@ If you use this library in academic work, please cite the original paper and thi
 @software{khan-trafilatura-dart,
   title = {{Trafilatura Dart: A Dart Port of Trafilatura}},
   author = "Khan, Kamran",
-  url = "https://github.com/kamranxdev/trafilatura-dart",
+  url = "https://github.com/kamranxdev/trafilatura",
   year = 2026,
   version = {1.0.0},
 }

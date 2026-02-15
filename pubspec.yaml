@@ -3,10 +3,10 @@ description: >-
   Dart port of Trafilatura - A library for web scraping, text extraction,
   and metadata extraction from HTML documents. Ported from the original
   Python library by kamranxdev (Kamran Khan).
-version: 1.0.0
-homepage: https://github.com/kamranxdev/trafilatura-dart
-repository: https://github.com/kamranxdev/trafilatura-dart
-issue_tracker: https://github.com/kamranxdev/trafilatura-dart/issues
+version: 1.0.1
+homepage: https://github.com/kamranxdev/trafilatura
+repository: https://github.com/kamranxdev/trafilatura
+issue_tracker: https://github.com/kamranxdev/trafilatura/issues
 
 environment:
   sdk: '>=3.0.0 <4.0.0'

@@ -42,7 +42,7 @@ Make sure you have the pub global bin directory in your PATH:
 Clone the repository and install dependencies:
 
 ```bash
-git clone https://github.com/kamranxdev/trafilatura-dart.git
+git clone https://github.com/kamranxdev/trafilatura.git
 cd trafilatura-dart
 dart pub get
 ```

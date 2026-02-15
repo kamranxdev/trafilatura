@@ -15,7 +15,7 @@ There are many ways to contribute:
 
 Here are some important resources:
 
-  * [List of currently open issues](https://github.com/kamranxdev/trafilatura-dart/issues)
+  * [List of currently open issues](https://github.com/kamranxdev/trafilatura/issues)
   * [How to contribute to open source](https://opensource.guide/how-to-contribute/)
 
 A special thanks to [Adrien Barbaresi](https://github.com/adbar) for the original Python [trafilatura](https://github.com/adbar/trafilatura) library that this Dart port is based on.
@@ -34,7 +34,7 @@ Here is how you can run the tests and code quality checks. Pull requests will on
 If you work on text extraction it is useful to check if performance is equal or better on the benchmark.
 
 
-For further questions you can use [GitHub issues](https://github.com/kamranxdev/trafilatura-dart/issues) and discussion pages.
+For further questions you can use [GitHub issues](https://github.com/kamranxdev/trafilatura/issues) and discussion pages.
 
 Thanks,
 
