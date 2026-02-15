@@ -1,0 +1,3 @@
+# Exclude large test data files from pub.dev package
+test/cache/
+test/eval/
